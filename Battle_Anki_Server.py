@@ -36,7 +36,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, 4096)
 print(f'[SERVER] Socket Created')
 
-utd_ver = "1.20"
+utd_ver = "2.00"
 connected_dict = {'utd_ver': utd_ver,
                   'clients connected': []}
 clients = []
@@ -134,7 +134,9 @@ class Handle:
                                 rec_data_str = str(received_str)
                                 client_dict = str_to_dict(rec_data_str)
                                 if client_dict['ver'] is not None:
-                                    if int(client_dict['ver'][-2:]) >= 16:
+                                    s1 = utd_ver.split('.')
+                                    c1 = str(client_dict['ver']).split('.')
+                                    if int(c1[1]) >= 16 or int(c1[0]) > 1:
                                         pass
                                     else:
                                         connected = False
